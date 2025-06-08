@@ -29,6 +29,27 @@
 
             <!-- Page Content -->
             <main>
+                <!-- Flash Messages -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+                    @if (session('success'))
+                        <x-alert type="success">
+                            {{ session('success') }}
+                        </x-alert>
+                    @endif
+
+                    @if (session('error'))
+                        <x-alert type="error">
+                            {{ session('error') }}
+                        </x-alert>
+                    @endif
+
+                    @if (session('warning'))
+                        <x-alert type="warning">
+                            {{ session('warning') }}
+                        </x-alert>
+                    @endif
+                </div>
+
                 {{ $slot }}
             </main>
         </div>

@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('welcome') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
@@ -15,6 +15,19 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('events.index')" :active="request()->routeIs('events.*')">
+                        Evenementen
+                    </x-nav-link>
+                    @auth
+                        <x-nav-link :href="route('tickets.index')" :active="request()->routeIs('tickets.*')">
+                            Mijn Tickets
+                        </x-nav-link>
+                        @if(auth()->user()->isAdmin())
+                            <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')">
+                                Admin Panel
+                            </x-nav-link>
+                        @endif
+                    @endauth
                 </div>
             </div>
 
@@ -70,6 +83,19 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('events.index')" :active="request()->routeIs('events.*')">
+                Evenementen
+            </x-responsive-nav-link>
+            @auth
+                <x-responsive-nav-link :href="route('tickets.index')" :active="request()->routeIs('tickets.*')">
+                    Mijn Tickets
+                </x-responsive-nav-link>
+                @if(auth()->user()->isAdmin())
+                    <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')">
+                        Admin Panel
+                    </x-responsive-nav-link>
+                @endif
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->
