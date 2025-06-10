@@ -12,7 +12,6 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         
-        // Alle gebruikers (inclusief admins) zien dezelfde dashboard
         $upcomingEvents = Event::where('is_active', true)
             ->where('start_date', '>', now())
             ->latest()

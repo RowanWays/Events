@@ -29,7 +29,6 @@ class TicketController extends Controller
             return back()->with('error', 'Je kunt geen tickets meer kopen voor dit evenement.');
         }
 
-        // Check if user already has a ticket for this event
         $existingTicket = Auth::user()->tickets()
             ->where('event_id', $event->id)
             ->where('status', 'active')
@@ -39,7 +38,6 @@ class TicketController extends Controller
             return back()->with('error', 'Je hebt al een ticket voor dit evenement!');
         }
 
-        // Create ticket
         $ticket = Ticket::create([
             'event_id' => $event->id,
             'user_id' => Auth::id(),
@@ -47,7 +45,6 @@ class TicketController extends Controller
             'status' => 'active',
         ]);
 
-        // Decrease available tickets
         $event->decrementAvailableTickets();
 
         return redirect()->route('tickets.show', $ticket)
@@ -56,7 +53,6 @@ class TicketController extends Controller
 
     public function show(Ticket $ticket)
     {
-        // Check if ticket belongs to current user or user is admin
         if ($ticket->user_id !== Auth::id() && !Auth::user()->isAdmin()) {
             abort(403, 'Je hebt geen toegang tot dit ticket.');
         }

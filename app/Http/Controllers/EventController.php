@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $events = Event::where('is_active', true)
@@ -23,17 +20,11 @@ class EventController extends Controller
         return view('events.index', compact('events'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('events.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -60,26 +51,17 @@ class EventController extends Controller
             ->with('success', 'Evenement succesvol aangemaakt!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Event $event)
     {
         $event->load('creator', 'tickets');
         return view('events.show', compact('event'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Event $event)
     {
         return view('events.edit', compact('event'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Event $event)
     {
         $validated = $request->validate([
@@ -101,7 +83,6 @@ class EventController extends Controller
             $validated['image'] = $request->file('image')->store('events', 'public');
         }
 
-        // Update available tickets if max_tickets changed
         if ($validated['max_tickets'] != $event->max_tickets) {
             $ticketsSold = $event->tickets_sold;
             $validated['available_tickets'] = max(0, $validated['max_tickets'] - $ticketsSold);
@@ -113,9 +94,6 @@ class EventController extends Controller
             ->with('success', 'Evenement succesvol bijgewerkt!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Event $event)
     {
         if ($event->image) {
