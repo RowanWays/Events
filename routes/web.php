@@ -34,6 +34,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/users', [AdminController::class, 'users'])->name('users.index');
     Route::get('/tickets', [AdminController::class, 'tickets'])->name('tickets.index');
     Route::patch('/users/{user}/toggle-admin', [AdminController::class, 'toggleUserAdmin'])->name('users.toggle-admin');
+    Route::delete('/tickets/{ticket}', [AdminController::class, 'destroyTicket'])->name('tickets.destroy');
     
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
     Route::post('/events', [EventController::class, 'store'])->name('events.store');

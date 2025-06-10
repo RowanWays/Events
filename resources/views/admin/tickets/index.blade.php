@@ -183,15 +183,24 @@
                                             </a>
                                             @if($ticket->status === 'active')
                                                 <form method="POST" action="{{ route('tickets.cancel', $ticket) }}" 
-                                                      class="inline"
+                                                      class="inline mr-2"
                                                       onsubmit="return confirm('Are you sure you want to cancel this ticket?')">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="text-red-600 hover:text-red-900">
+                                                    <button type="submit" class="text-yellow-600 hover:text-yellow-900">
                                                         Cancel
                                                     </button>
                                                 </form>
                                             @endif
+                                            <form method="POST" action="{{ route('admin.tickets.destroy', $ticket) }}" 
+                                                  class="inline"
+                                                  onsubmit="return confirm('Weet je zeker dat je dit ticket permanent wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-600 hover:text-red-900">
+                                                    Delete
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty

@@ -99,4 +99,18 @@ class AdminController extends Controller
         
         return back()->with('success', "User {$user->name} has been {$status}.");
     }
+
+    public function destroyTicket(Ticket $ticket)
+    {
+        $event = $ticket->event;
+        
+        if ($ticket->status === 'active') {
+            $event->increment('available_tickets');
+        }
+        
+        $ticket->delete();
+
+        return redirect()->route('admin.tickets.index')
+            ->with('success', 'Ticket succesvol verwijderd!');
+    }
 }
