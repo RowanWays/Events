@@ -7,9 +7,6 @@ use Illuminate\Database\Seeder;
 
 class EventSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $admin = \App\Models\User::where('is_admin', true)->first();

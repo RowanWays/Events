@@ -10,7 +10,6 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     
-                    <!-- Ticket Header -->
                     <div class="mb-6 p-4 bg-gray-50 rounded-lg">
                         <div class="flex justify-between items-start">
                             <div>
@@ -27,7 +26,6 @@
                         </div>
                     </div>
 
-                    <!-- Event Details -->
                     <div class="grid md:grid-cols-2 gap-6 mb-6">
                         <div>
                             <h4 class="text-lg font-semibold mb-3">Evenement Details</h4>
@@ -53,7 +51,6 @@
                         </div>
                     </div>
 
-                    <!-- Event Image -->
                     @if($ticket->event->image_path)
                         <div class="mb-6">
                             <img src="{{ Storage::url($ticket->event->image_path) }}" 
@@ -62,7 +59,6 @@
                         </div>
                     @endif
 
-                    <!-- Action Buttons -->
                     <div class="flex justify-between items-center">
                         <a href="{{ route('tickets.index') }}" 
                            class="btn btn-secondary">
@@ -87,7 +83,6 @@
                         @endif
                     </div>
 
-                    <!-- QR Code Placeholder (for future implementation) -->
                     <div class="mt-6 p-4 bg-gray-50 rounded-lg text-center">
                         <h4 class="text-lg font-semibold mb-2">QR Code</h4>
                         <div class="w-32 h-32 bg-gray-200 mx-auto rounded flex items-center justify-center">

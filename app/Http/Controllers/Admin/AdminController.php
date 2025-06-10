@@ -57,7 +57,6 @@ class AdminController extends Controller
     {
         $query = Ticket::with(['event', 'user']);
 
-        // Apply filters
         if ($request->filled('event')) {
             $query->where('event_id', $request->event);
         }
@@ -75,13 +74,11 @@ class AdminController extends Controller
 
         $tickets = $query->latest()->paginate(15);
 
-        // Get statistics
         $totalTickets = Ticket::count();
         $activeTickets = Ticket::where('status', 'active')->count();
         $cancelledTickets = Ticket::where('status', 'cancelled')->count();
         $totalRevenue = Ticket::where('status', 'active')->sum('price_paid');
 
-        // Get events for filter dropdown
         $events = Event::orderBy('title')->get();
 
         return view('admin.tickets.index', compact(
